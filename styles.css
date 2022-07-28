@@ -43,8 +43,8 @@ h1 {
     align-items: center;
     color: var(--fontsColor);
     background-color: rgb(237, 241, 245);
-    width: 30vw;
-    height: 30vh;
+    width: 30%;
+    height: 30%;
     border-radius: 15px;
     font-size: 1rem;
     margin-top: 20vh;
@@ -170,6 +170,7 @@ h1 {
 .box {
     width: 7vmin;
     height: 10vmin;
+    padding-bottom: 1vmin;
     background-color: var(--cellBorder);
     margin: 0 1vmin;
     color: wheat;
@@ -194,7 +195,7 @@ h1 {
 }
 
 .remain {
-    font-size: 3vmin;
+    font-size: 2.5vmin;
     color: white;
 }
 
@@ -206,4 +207,11 @@ h1 {
     text-align: center;
     line-height: 170%;
     cursor: pointer;
+}
+
+@media screen and (max-width: 450px) {
+    .settings {
+        width: 50%;
+        height: 30%;
+    }
 }
