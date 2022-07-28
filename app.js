@@ -57,10 +57,13 @@ playBtn.addEventListener("click", () => {
                 cell.cell.innerHTML = cell.number_;
                 cell.cell.style.backgroundColor = "rgb(142, 149, 155)";
 
-                checkWin();
+                checkWin(gameBoard, gridSize);
 
                 let selectedBox = document.getElementById(cell.number_);
                 let remaining = selectedBox.lastChild;
+
+                console.log(selectedBox);
+                console.log(remaining);
 
                 if (Number(remaining.innerHTML) > 1) {
                     remaining.innerHTML = Number(remaining.innerHTML) - 1;
@@ -166,15 +169,19 @@ function createNumbersBox(gameBoard) {
     document.body.appendChild(numbersBox);
 }
 
-function checkWin() {
-
+function checkWin(gameBoard, gridSize) {
+    let count = 0;
     gameBoard.cells.forEach((cell) => {
         if (cell.hidden) {
             return false;
+        } else {
+            count++;
         }
-        alert("You Win");
-        return true;
     })
+
+    if (count == Number(gridSize) * Number(gridSize)) {
+        alert("You Win")
+    }
 }
 
 
