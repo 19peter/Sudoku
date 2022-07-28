@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --BackColor: rgb(237, 241, 245);
+    --fontsColor: rgb(57, 103, 253);
+    --cellBorder: rgb(70, 145, 141);
+    --borderRad: 15px;
+}
+
+
+body {
+    background-color: rgba(146, 160, 170, 0.993);
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    padding: 2vmin;
+    font-family: 'Macondo', cursive;
+    text-align: center;
+}
+
+.header {
+    height: fit-content;
+    color: rgb(237, 241, 245);
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1.75rem;
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--fontsColor);
+    background-color: rgb(237, 241, 245);
+    width: 30vw;
+    height: 30vh;
+    border-radius: 15px;
+    font-size: 1rem;
+    margin-top: 20vh;
+}
+
+.settings h3 {
+    margin: 2%;
+}
+
+#levels {
+    width: 40%;
+    height: 15%;
+    text-align: center;
+    margin: 2%;
+    border-radius: var(--borderRad);
+}
+
+.selectBtn {
+    width: 40%;
+    height: 15%;
+    margin: 2%;
+    border: 1px solid;
+    border-radius: var(--borderRad);
+    cursor: pointer;
+}
+
+.parent {
+    display: none;
+    grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+    grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+}
+
+.mistakes {
+    display: none;
+    position: relative;
+    right: 24vmin;
+    top: 1vmin;
+    color:rgb(8, 61, 61);
+    font-size: 2.5vmin;
+    font-weight: 900;
+}
+
+.container {
+    display: none;
+    grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+    grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+    background-color: var(--BackColor);
+    box-shadow: -5px -7px 8px 12px rgba(72, 149, 145, 0.87),11px 11px 8px 11px rgba(67, 139, 135, 0.68);
+    margin-top: 5vmin;
+}
+
+.square {
+    display: grid;
+    grid-template-columns: repeat(var(--square-size), var(--square-cell-size));
+    grid-template-rows: repeat(var(--square-size), var(--square-cell-size));
+    border: solid black 1px;
+}
+
+.cell {
+    background-color: rgb(142, 194, 194);
+    border: 0.25px var(--cellBorder) solid;
+    font-size: 4vmin;
+    color: white;
+    text-align: center;
+    line-height: 170%;
+    cursor: pointer;
+    
+}
+
+.cell:hover {
+    transform: scale(1.2);
+    border: 0.25px solid rgb(37, 92, 92);
+}
+
+.animated-cell {
+    animation: appear 1s ease 0s normal none;
+}
+
+@keyframes appear {
+    0.0%{
+        background: #8EC2C2;
+        opacity: 0.2;
+        /* font-size: 30px; */
+    }
+    47.8%{
+        background: #8EC2C2;
+        opacity: 1;
+        /* font-size: 30px; */
+        /* color: rgb(142, 149, 155); */
+    }
+}
+
+
+.column-border {
+    border-right: 1px solid black;
+}
+
+.left-column-border {
+    border-left: 1px solid black;
+}
+
+.top-row-border {
+    border-top: 1px solid black;
+}
+
+.row-border {
+    border-bottom: 1px solid black;
+}
+
+.numbers-box {
+    width: fit-content;
+    height: 10%;
+    padding: 0 3vmin;
+    background-color: rgba(146, 160, 170, 0.993);
+    margin-top: 40px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    width: 7vmin;
+    height: 10vmin;
+    background-color: var(--cellBorder);
+    margin: 0 1vmin;
+    color: wheat;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 35%;
+    cursor: pointer;
+}
+
+.box:hover {
+    transform: scale(1.2);
+}
+
+.number {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vmin;
+    color: white;
+}
+
+.remain {
+    font-size: 3vmin;
+    color: white;
+}
+
+.false {
+    background-color: rgb(238, 74, 74);
+    border: 0.25px var(--cellBorder) solid;
+    font-size: 4vmin;
+    color: white;
+    text-align: center;
+    line-height: 170%;
+    cursor: pointer;
+}
