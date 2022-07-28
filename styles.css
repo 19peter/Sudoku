@@ -209,6 +209,11 @@ h1 {
     cursor: pointer;
 }
 
+.clicked-cell {
+    border: 0.25px var(--cellBorder) solid;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 450px) {
     .settings {
         width: 50%;

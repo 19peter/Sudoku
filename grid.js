@@ -160,6 +160,29 @@ export default class Grid {
                 el.cell.style.color = "white"
             })
 
+            el.cell.addEventListener("click", () => {
+                if (!el.isClicked && !el.hidden) {
+                    el.isClicked = true;
+                    el.cell.style.transform = "scale(1.2)";
+                    this.cells.forEach((cell) => {
+                        if (cell.number_ == el.number_ && !cell.hidden) {
+                            cell.cell.style.transform = "scale(1.2)";
+                            cell.cell.classList.add("clicked-cell")
+                        }
+                    })
+                } else if (el.isClicked && !el.hidden) {
+                    el.isClicked = false;
+                    el.cell.style.transform = "scale(1)";
+                    this.cells.forEach((cell) => {
+                        if (cell.number_ == el.number_ && !cell.hidden) {
+                            cell.cell.style.transform = "scale(1)";
+                            cell.cell.classList.remove("clicked-cell")
+
+                        }
+                    })
+                }
+            })
+
         })
     }
 }
@@ -170,6 +193,7 @@ class Cell {
         this.number_;
         this.hidden = false;
         this.false = false;
+        this.isClicked = false;
         this.cell = document.createElement("div");
         this.cell.classList.add("cell");
 
