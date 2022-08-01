@@ -70,6 +70,7 @@ playBtn.addEventListener("click", () => {
                     remaining.innerHTML = Number(remaining.innerHTML) - 1;
                 } else {
                     selectedBox.remove();
+                    selectedNumber = 0;
                 }
 
             } else if (cell.hidden && selectedNumber !== cell.number_) {
