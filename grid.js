@@ -1,5 +1,5 @@
 export default class Grid {
-    constructor(container, gridSize) {
+    constructor(container, gridSize, diffLevel) {
         var cellArray = [];
         var rows = [];
         var columns = [];
@@ -77,8 +77,27 @@ export default class Grid {
             //Below we can write a code to implement different difficulty levels based on the number
             //of hidden cells
             //Current is default easy
+            let range;
+            let rangeStart;
+            switch (diffLevel) {
+                case "easy":
+                    range = 1;
+                    rangeStart = 3;
+                    break;
+                case "hard":
+                    range = 3;
+                    rangeStart = 4;
+                    break;
+                case "extreme":
+                    range = 3;
+                    rangeStart = 8;
+                    break;
+                default:
+                    range = 1;
+                    rangeStart = 2;
+            }
 
-            let numberOfHiddenCells = Math.floor(Math.random() * 4) + 5;
+            let numberOfHiddenCells = Math.floor(Math.random() * range) + rangeStart;
 
             for (let i = 0; i < numberOfHiddenCells; i++) {
                 let randomIndex = Math.floor(Math.random() * 8) + 1;
@@ -247,9 +266,4 @@ class Cell {
 
         container.appendChild(this.cell);
     }
-
-    set number(v) {
-        this.number_ = v
-    }
-
 }

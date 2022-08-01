@@ -55,7 +55,7 @@ h1 {
     margin: 2%;
 }
 
-#levels {
+#levels, #difficulty {
     width: 40%;
     height: 15%;
     text-align: center;
@@ -64,7 +64,7 @@ h1 {
 }
 
 .selectBtn {
-    width: 40%;
+    width: 60%;
     height: 15%;
     margin: 2%;
     border: 1px solid;
@@ -128,13 +128,10 @@ h1 {
     0.0%{
         background: #8EC2C2;
         opacity: 0.2;
-        /* font-size: 30px; */
     }
     47.8%{
         background: #8EC2C2;
         opacity: 1;
-        /* font-size: 30px; */
-        /* color: rgb(142, 149, 155); */
     }
 }
 
@@ -213,13 +210,6 @@ h1 {
 .clicked-cell {
     border: 0.25px var(--cellBorder) solid;
     cursor: pointer;
-    /* background-color: red;
-    border: 0.25px var(--cellBorder) solid;
-    font-size: 4vmin;
-    color: white;
-    text-align: center;
-    line-height: 170%;
-    cursor: pointer; */
 }
 
 @media screen and (max-width: 450px) {

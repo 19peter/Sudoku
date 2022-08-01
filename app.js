@@ -6,10 +6,12 @@ import sudokuChecker from "./sudokuChecker.js";
 const container = document.querySelector(".container");
 const settings = document.querySelector(".settings");
 const level = document.getElementById("levels");
+let difficulty = document.getElementById("difficulty");
 const playBtn = document.querySelector(".selectBtn");
 const mistakesSection = document.querySelector(".mistakes");
 
 let gridSize;
+let diffLevel;
 let hiddenNumbers = [[], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0], [9, 0]];
 //Selected Number links between the numbers boxes and the functions of cells and the game
 let selectedNumber = 0;
@@ -17,6 +19,7 @@ let mistakes = 0;
 
 
 playBtn.addEventListener("click", () => {
+    diffLevel = difficulty.value;
     gridSize = level.value;
     settings.style.display = "none";
 
@@ -26,8 +29,8 @@ playBtn.addEventListener("click", () => {
     container.style.setProperty("--grid-size", gridSize)
     container.style.setProperty("--cell-size", `7vmin`)
 
-    const gameBoard = new Grid(container, gridSize);
-    // console.log(gameBoard.cells)
+    const gameBoard = new Grid(container, gridSize, diffLevel);
+    console.log(diffLevel)
 
     let sudokuMap = generateSudoku(gridSize);
 
@@ -77,7 +80,6 @@ playBtn.addEventListener("click", () => {
                 cell.cell.innerHTML = selectedNumber;
                 cell.false = true;
 
-                // cell.cell.style.backgroundColor = "rgb(238, 74, 74)";
                 cell.cell.style.setProperty("--cellBackground", 'rgb(238, 74, 74)')
 
 
@@ -133,12 +135,16 @@ function createNumbersBox(gameBoard) {
     let boxes = [];
 
     for (let i = 1; i < hiddenNumbers.length; i++) {
-        let box = new NumbersBox(hiddenNumbers, numbersBox, i);
-        let boxElement = box.box;
-        let numberElement = box.numberElement;
-        let remainElement = box.remainElement;
+        if (hiddenNumbers[i][1] == 0) {
 
-        boxes.push(box);
+        } else {
+            let box = new NumbersBox(hiddenNumbers, numbersBox, i);
+            let boxElement = box.box;
+            let numberElement = box.numberElement;
+            let remainElement = box.remainElement;
+
+            boxes.push(box);
+        }
     }
 
     boxes.forEach((box) => {
