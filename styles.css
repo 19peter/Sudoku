@@ -10,6 +10,7 @@
     --fontsColor: rgb(57, 103, 253);
     --cellBorder: rgb(70, 145, 141);
     --borderRad: 15px;
+    /* rgb(142, 194, 194) */
 }
 
 
@@ -104,7 +105,7 @@ h1 {
 }
 
 .cell {
-    background-color: rgb(142, 194, 194);
+    background-color: var(--cellBackground);
     border: 0.25px var(--cellBorder) solid;
     font-size: 4vmin;
     color: white;
@@ -212,6 +213,13 @@ h1 {
 .clicked-cell {
     border: 0.25px var(--cellBorder) solid;
     cursor: pointer;
+    /* background-color: red;
+    border: 0.25px var(--cellBorder) solid;
+    font-size: 4vmin;
+    color: white;
+    text-align: center;
+    line-height: 170%;
+    cursor: pointer; */
 }
 
 @media screen and (max-width: 450px) {

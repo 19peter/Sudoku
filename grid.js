@@ -91,7 +91,7 @@ export default class Grid {
         }
 
 
-        //Creating background color on hovering on cells and Writing Numbers inside cells
+        //Creating background color and hovering color on cells and Writing Numbers inside cells
         this.cells.forEach((el, index) => {
             setTimeout(() => {
                 el.cell.classList.add("animated-cell");
@@ -100,28 +100,48 @@ export default class Grid {
                 }
             }, index * 20);
 
+            let normalCellColor = "rgb(142, 194, 194)";
+            let clickedCellColor = "rgb(2, 56, 66)";
+            let falseCellColor = "rgb(238, 74, 74)";
+            let hoverPriColor = "gray";
+            let hoverSecColor = "rgb(142, 149, 155)";
+
+            el.cell.style.setProperty("--cellBackground", normalCellColor)
+
             el.cell.addEventListener("mouseover", () => {
                 this.rows[el.rowIndex].forEach((element) => {
                     if (element.false) {
-                        element.cell.style.backgroundColor = "rgb(238, 74, 74)";
-                    } else {
-                        element.cell.style.backgroundColor = "rgb(142, 149, 155)";
+                        element.cell.style.setProperty("--cellBackground", falseCellColor)
+                    }
+                    else if (element.isClicked) {
+                        element.cell.style.setProperty("--cellBackground", clickedCellColor);
+                    }
+                    else {
+                        element.cell.style.setProperty("--cellBackground", hoverSecColor)
                     }
                 })
 
                 this.columns[el.columnIndex].forEach((element) => {
                     if (element.false) {
-                        element.cell.style.backgroundColor = "rgb(238, 74, 74)";
-                    } else {
-                        element.cell.style.backgroundColor = "rgb(142, 149, 155)";
+                        element.cell.style.setProperty("--cellBackground", falseCellColor)
+                    }
+                    else if (element.isClicked) {
+                        element.cell.style.setProperty("--cellBackground", clickedCellColor)
+                    }
+                    else {
+                        element.cell.style.setProperty("--cellBackground", hoverSecColor)
                     }
                 })
 
                 this.squares[el.squareIndex].forEach((element) => {
                     if (element.false) {
-                        element.cell.style.backgroundColor = "rgb(238, 74, 74)";
-                    } else {
-                        element.cell.style.backgroundColor = "gray";
+                        element.cell.style.setProperty("--cellBackground", falseCellColor)
+                    }
+                    else if (element.isClicked) {
+                        element.cell.style.setProperty("--cellBackground", clickedCellColor)
+                    }
+                    else {
+                        element.cell.style.setProperty("--cellBackground", hoverPriColor)
                     }
                 })
 
@@ -135,25 +155,37 @@ export default class Grid {
             el.cell.addEventListener("mouseleave", () => {
                 this.rows[el.rowIndex].forEach((element) => {
                     if (element.false) {
-                        element.cell.style.backgroundColor = "rgb(238, 74, 74)";
-                    } else {
-                        element.cell.style.backgroundColor = "rgb(142, 194, 194)";
+                        element.cell.style.setProperty("--cellBackground", falseCellColor)
+                    }
+                    else if (element.isClicked) {
+                        element.cell.style.setProperty("--cellBackground", clickedCellColor)
+                    }
+                    else {
+                        element.cell.style.setProperty("--cellBackground", normalCellColor)
                     }
                 })
 
                 this.columns[el.columnIndex].forEach((element) => {
                     if (element.false) {
-                        element.cell.style.backgroundColor = "rgb(238, 74, 74)";
-                    } else {
-                        element.cell.style.backgroundColor = "rgb(142, 194, 194)";
+                        element.cell.style.setProperty("--cellBackground", falseCellColor)
+                    }
+                    else if (element.isClicked) {
+                        element.cell.style.setProperty("--cellBackground", clickedCellColor)
+                    }
+                    else {
+                        element.cell.style.setProperty("--cellBackground", normalCellColor)
                     }
                 })
 
                 this.squares[el.squareIndex].forEach((element) => {
                     if (element.false) {
-                        element.cell.style.backgroundColor = "rgb(238, 74, 74)";
-                    } else {
-                        element.cell.style.backgroundColor = "rgb(142, 194, 194)";
+                        element.cell.style.setProperty("--cellBackground", falseCellColor)
+                    }
+                    else if (element.isClicked) {
+                        element.cell.style.setProperty("--cellBackground", clickedCellColor)
+                    }
+                    else {
+                        element.cell.style.setProperty("--cellBackground", normalCellColor)
                     }
                 })
 
@@ -161,23 +193,39 @@ export default class Grid {
             })
 
             el.cell.addEventListener("click", () => {
+
+                this.cells.forEach((cell) => {
+                    cell.isClicked = false;
+                    cell.cell.style.transform = "scale(1)";
+                    cell.cell.classList.remove("clicked-cell");
+                    if (!cell.false) {
+                        cell.cell.style.setProperty("--cellBackground", normalCellColor);
+                    }
+                })
+
                 if (!el.isClicked && !el.hidden) {
                     el.isClicked = true;
-                    el.cell.style.transform = "scale(1.2)";
+                    el.cell.style.transform = "scale(1.09)";
+                    el.cell.style.setProperty("--cellBackground", clickedCellColor);
                     this.cells.forEach((cell) => {
                         if (cell.number_ == el.number_ && !cell.hidden) {
-                            cell.cell.style.transform = "scale(1.2)";
-                            cell.cell.classList.add("clicked-cell")
+                            cell.isClicked = true;
+                            cell.cell.style.transform = "scale(1.1)";
+                            cell.cell.classList.add("clicked-cell");
+                            cell.cell.style.setProperty("--cellBackground", clickedCellColor);
                         }
                     })
                 } else if (el.isClicked && !el.hidden) {
                     el.isClicked = false;
                     el.cell.style.transform = "scale(1)";
+                    el.cell.style.setProperty("--cellBackground", normalCellColor);
+
                     this.cells.forEach((cell) => {
                         if (cell.number_ == el.number_ && !cell.hidden) {
+                            cell.isClicked = false;
                             cell.cell.style.transform = "scale(1)";
                             cell.cell.classList.remove("clicked-cell")
-
+                            cell.cell.style.setProperty("--cellBackground", normalCellColor);
                         }
                     })
                 }

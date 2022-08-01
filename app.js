@@ -55,7 +55,8 @@ playBtn.addEventListener("click", () => {
                 cell.false = false;
 
                 cell.cell.innerHTML = cell.number_;
-                cell.cell.style.backgroundColor = "rgb(142, 149, 155)";
+                // cell.cell.style.backgroundColor = "rgb(142, 149, 155)";
+                cell.cell.style.setProperty("--cellBackground", 'rgb(142, 149, 155)')
 
                 checkWin(gameBoard, gridSize);
 
@@ -75,7 +76,9 @@ playBtn.addEventListener("click", () => {
                 cell.cell.innerHTML = selectedNumber;
                 cell.false = true;
 
-                cell.cell.style.backgroundColor = "rgb(238, 74, 74)";
+                // cell.cell.style.backgroundColor = "rgb(238, 74, 74)";
+                cell.cell.style.setProperty("--cellBackground", 'rgb(238, 74, 74)')
+
 
                 mistakes++;
                 mistakesSection.innerHTML = `Mistakes: ${mistakes} / 3`;
@@ -110,10 +113,9 @@ function createBorder(gameBoard) {
 
 function assignNumbersToCells(gameBoard, sudokuMap) {
 
-
     for (let i = 0; i < Number(gridSize); i++) {
         for (let k = 0; k < Number(gridSize); k++) {
-            gameBoard.rows[i][k].number_ = sudokuMap[i][k]
+            gameBoard.rows[i][k].number_ = sudokuMap[i][k];
 
             if (gameBoard.rows[i][k].hidden) {
                 hiddenNumbers[gameBoard.rows[i][k].number_][1]++;
