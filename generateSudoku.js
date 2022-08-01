@@ -19,7 +19,7 @@ export default function generateSudoku(gridSize) {
     generateSquare(defaultSudoku, gridSize, 0, 0);
 
 
-    //Generating next five squares individually and backtracking
+    //Generating next squares individually and backtracking
     for (let startRow = 0; startRow < Number(gridSize) - Math.sqrt(Number(gridSize)) + 1; startRow += Math.sqrt(Number(gridSize))) {
 
         //If startRow is == 1, we skip the first 3 columns and start from the 2nd square
@@ -143,15 +143,15 @@ function checkUndefinedCells(startRow, startCol, allNumbers, mockSudoku, gridSiz
 
     let undefinedCounter = 0;
     let squareNumbers = [];
-    let positions = [];
-    let position = [ /* row , col */]
+//     let positions = [];
+//     let position = [ /* row , col */]
 
     for (let row = startRow; row < startRow + Math.sqrt(Number(gridSize)); row++) {
         for (let cell = startCol; cell < startCol + Math.sqrt(Number(gridSize)); cell++) {
             if (mockSudoku[row][cell] == 0 || mockSudoku[row][cell] == undefined) {
                 undefinedCounter++;
-                position.push(row, cell)
-                positions.push(position);
+//                 position.push(row, cell)
+//                 positions.push(position);
             } else {
                 squareNumbers.push(mockSudoku[row][cell]);
             }
@@ -175,9 +175,6 @@ function checkUndefinedCells(startRow, startCol, allNumbers, mockSudoku, gridSiz
             check: true,
             unassignedNumbersArray: unassignedNumbers
         };
-
-        // count: undefinedCounter
-        // undefinedPosition: positions
 
         return response;
     } else {
