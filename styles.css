@@ -321,6 +321,19 @@ label {
 @media screen and (max-width: 450px) {
     .settings {
         width: 50%;
-        height: 30%;
+        height: 40%;
+    }
+
+    .set-settings {
+        width: 40%;
+    }
+
+    .adv-settings-menu {
+        height: 70%;
+        width: 80%;
+    }
+
+    .adv-settings-menu div {
+        margin: 5vmin 0;
     }
 }
