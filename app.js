@@ -6,31 +6,74 @@ import sudokuChecker from "./sudokuChecker.js";
 const container = document.querySelector(".container");
 const settings = document.querySelector(".settings");
 const level = document.getElementById("levels");
-let difficulty = document.getElementById("difficulty");
+const difficulty = document.getElementById("difficulty");
 const playBtn = document.querySelector(".selectBtn");
 const mistakesSection = document.querySelector(".mistakes");
+const settingsBtn = document.querySelector(".set-settings");
+const advSettingsMenu = document.querySelector(".adv-settings-menu");
+const closeBtn = document.querySelector(".close-btn");
+const timer = document.querySelector(".timer");
+
+//ALL CODE FOR ADVANCED SETTINGS IS COMMENTED PRIOR WITH "Game Advanced Settings"
+const mistakesSetting = document.getElementById("mistakes-settings");
+const eraseFalseSetting = document.getElementById("erase-false-settings");
+const timerSetting = document.getElementById("timer-settings");
+const numberBoxSetting = document.getElementById("numberbox-settings");
+const timerInput = document.getElementById("timer-input");
+
 
 let gridSize;
 let diffLevel;
 let hiddenNumbers = [[], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0], [9, 0]];
 //Selected Number links between the numbers boxes and the functions of cells and the game
+let boxes = [];
 let selectedNumber = 0;
 let mistakes = 0;
 
 
+settingsBtn.addEventListener("click", () => {
+    advSettingsMenu.style.display = "flex";
+})
+
+closeBtn.addEventListener("click", () => {
+    advSettingsMenu.style.display = "none";
+})
+
+//Game Advanced Settings
+timerSetting.addEventListener("click", () => {
+    if (timerSetting.checked) {
+        timerInput.style.visibility = "visible";
+        timerInput.focus();
+    } else {
+        timerInput.style.visibility = "hidden";
+    }
+})
+
+
 playBtn.addEventListener("click", () => {
+
+    //Game Advanced Settings
+    if (timerSetting.checked) {
+        setTimer();
+    }
+
     diffLevel = difficulty.value;
     gridSize = level.value;
     settings.style.display = "none";
 
-    mistakesSection.style.display = "grid";
-    mistakesSection.innerHTML = `Mistakes: ${mistakes} / 3`
+    //Game Advanced Setting
+    if (mistakesSetting.checked) {
+        mistakesSection.innerHTML = `Mistakes: ${mistakes} / 3`
+
+    } else {
+        mistakesSection.innerHTML = `No Mistake Count`
+    }
+
     container.style.display = "grid";
     container.style.setProperty("--grid-size", gridSize)
     container.style.setProperty("--cell-size", `7vmin`)
 
-    const gameBoard = new Grid(container, gridSize, diffLevel);
-    console.log(diffLevel)
+    const gameBoard = new Grid(container, gridSize, diffLevel, eraseFalseSetting.checked);
 
     let sudokuMap = generateSudoku(gridSize);
 
@@ -58,7 +101,6 @@ playBtn.addEventListener("click", () => {
                 cell.false = false;
 
                 cell.cell.innerHTML = cell.number_;
-                // cell.cell.style.backgroundColor = "rgb(142, 149, 155)";
                 cell.cell.style.setProperty("--cellBackground", 'rgb(142, 149, 155)')
 
                 checkWin(gameBoard, gridSize);
@@ -66,8 +108,14 @@ playBtn.addEventListener("click", () => {
                 let selectedBox = document.getElementById(cell.number_);
                 let remaining = selectedBox.lastChild;
 
-                console.log(selectedBox);
-                console.log(remaining);
+                //Game Advanced Setting
+                if (!numberBoxSetting.checked) {
+                    selectedNumber = 0;
+                    boxes.forEach((box) => {
+                        box.toggle = false;
+                        box.box.style.transform = "scale(1)";
+                    })
+                }
 
                 if (Number(remaining.innerHTML) > 1) {
                     remaining.innerHTML = Number(remaining.innerHTML) - 1;
@@ -78,19 +126,26 @@ playBtn.addEventListener("click", () => {
 
             } else if (cell.hidden && selectedNumber !== cell.number_) {
                 cell.cell.innerHTML = selectedNumber;
+                selectedNumber = 0;
                 cell.false = true;
+
+                boxes.forEach((box) => {
+                    box.toggle = false;
+                    box.box.style.transform = "scale(1)";
+                })
 
                 cell.cell.style.setProperty("--cellBackground", 'rgb(238, 74, 74)')
 
+                //Game Advanced Setting
+                if (mistakesSetting.checked) {
+                    mistakes++;
+                    mistakesSection.innerHTML = `Mistakes: ${mistakes} / 3`;
 
-                mistakes++;
-                mistakesSection.innerHTML = `Mistakes: ${mistakes} / 3`;
-
-                if (mistakes > 2) {
-                    alert("You lost");
-                    window.location.reload();
-                }
-
+                    if (mistakes > 2) {
+                        alert("You lost");
+                        window.location.reload();
+                    }
+                } 
             }
         })
     })
@@ -131,8 +186,6 @@ function assignNumbersToCells(gameBoard, sudokuMap) {
 function createNumbersBox(gameBoard) {
     let numbersBox = document.createElement("div");
     numbersBox.className = "numbers-box";
-
-    let boxes = [];
 
     for (let i = 1; i < hiddenNumbers.length; i++) {
         if (hiddenNumbers[i][1] == 0) {
@@ -191,6 +244,36 @@ function checkWin(gameBoard, gridSize) {
     if (count == Number(gridSize) * Number(gridSize)) {
         alert("You Win")
     }
+}
+
+function setTimer() {
+    //Game Advanced Settings
+    let currentTime = new Date().getTime();
+    let stopTime = currentTime + (timerInput.value * 60000);
+
+    let myInterval = setInterval(function () {
+
+        currentTime = new Date().getTime();
+
+        let distance = stopTime - currentTime + 2000;
+
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        console.log(minutes, seconds);
+
+        timer.textContent = minutes + ":" + seconds;
+
+        if (distance < 0) {
+            clearInterval(myInterval)
+            alert("You lost");
+            window.location.reload();
+        }
+    }, 1000)
+
+
+
+
 }
 
 

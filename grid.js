@@ -1,5 +1,5 @@
 export default class Grid {
-    constructor(container, gridSize, diffLevel) {
+    constructor(container, gridSize, diffLevel, advSetting) {
         var cellArray = [];
         var rows = [];
         var columns = [];
@@ -165,7 +165,7 @@ export default class Grid {
                 })
 
                 if (el.false) {
-                    el.cell.style.color = "white"
+                    el.cell.style.color = "rgb(11, 72, 90)"
                 } else {
                     el.cell.style.color = "cyan"
                 }
@@ -208,7 +208,7 @@ export default class Grid {
                     }
                 })
 
-                el.cell.style.color = "white"
+                el.cell.style.color = "rgb(11, 72, 90)"
             })
 
             el.cell.addEventListener("click", () => {
@@ -247,6 +247,14 @@ export default class Grid {
                             cell.cell.style.setProperty("--cellBackground", normalCellColor);
                         }
                     })
+                }
+
+                if (advSetting) {
+                    if (el.false) {
+                        el.false = false;
+                        el.cell.textContent = " ";
+                        el.cell.style.setProperty("--cellBackground", normalCellColor)
+                    }
                 }
             })
 

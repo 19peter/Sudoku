@@ -29,6 +29,10 @@ h1 {
     text-align: center;
 }
 
+label {
+    text-align: left;
+}
+
 .header {
     height: fit-content;
     color: rgb(237, 241, 245);
@@ -44,7 +48,7 @@ h1 {
     align-items: center;
     color: var(--fontsColor);
     background-color: rgb(237, 241, 245);
-    width: 30%;
+    width: 50vmin;
     height: 30%;
     border-radius: 15px;
     font-size: 1rem;
@@ -55,7 +59,93 @@ h1 {
     margin: 2%;
 }
 
-#levels, #difficulty {
+.heading {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+}
+
+.set-settings {
+    width: 10%;
+    height: 10%;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    right: 5vmin;
+    top: 15%;
+
+}
+
+.adv-settings-menu {
+    width: 60vmin;
+    height: 50vmin;
+    background-color: rgb(224, 240, 239);
+    opacity: 0.95;
+    position: absolute;
+    top: 25vmin;
+    border-radius: 10px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid rgb(61, 132, 165);
+
+    -webkit-box-shadow: 22px 16px 31px 20px rgba(31, 82, 88, 0.7); 
+    box-shadow: 22px 16px 31px 20px rgba(31, 82, 88, 0.7);
+
+}
+
+.settings-head {
+    width: 100%;
+    height: 7vmin;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.close-btn {
+    width: 10%;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(224, 240, 239);
+}
+
+.settings-content {
+    width: 85%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-content div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3vmin;
+    height: 5vmin;
+    width: 100%;
+    margin-bottom: 1vmin;
+    /* border: 2px solid rgb(61, 132, 165); */
+    border-radius: 5px;
+}
+
+.settings-content>div>input {
+    margin-left: 2vmin;
+}
+
+.settings-content div:hover {
+    background-color: rgb(61, 132, 165);
+}
+
+#timer-input {
+    visibility: hidden;
+    font-weight: 600;
+    text-align: center;
+    width: 10vmin;
+    height: 3vmin;
+}
+
+#levels,
+#difficulty {
     width: 40%;
     height: 15%;
     text-align: center;
@@ -78,14 +168,28 @@ h1 {
     grid-template-rows: repeat(var(--grid-size), var(--cell-size));
 }
 
+.header-two {
+    display: flex;
+    flex-direction: row;
+    width: 60vmin;
+}
+
 .mistakes {
-    display: none;
-    position: relative;
-    right: 24vmin;
-    top: 1vmin;
-    color:rgb(8, 61, 61);
+    display: flex;
+    width: 50%;
+    color: rgb(8, 61, 61);
     font-size: 2.5vmin;
     font-weight: 900;
+    
+}
+
+.timer {
+    display: flex;
+    justify-content: flex-end;
+    width: 50%;
+    color: rgb(8, 61, 61);
+    font-size: 2.5vmin;
+    font-weight: bolder;
 }
 
 .container {
@@ -93,7 +197,7 @@ h1 {
     grid-template-columns: repeat(var(--grid-size), var(--cell-size));
     grid-template-rows: repeat(var(--grid-size), var(--cell-size));
     background-color: var(--BackColor);
-    box-shadow: -5px -7px 8px 12px rgba(72, 149, 145, 0.87),11px 11px 8px 11px rgba(67, 139, 135, 0.68);
+    box-shadow: -5px -7px 8px 12px rgba(72, 149, 145, 0.87), 11px 11px 8px 11px rgba(67, 139, 135, 0.68);
     margin-top: 5vmin;
 }
 
@@ -108,11 +212,12 @@ h1 {
     background-color: var(--cellBackground);
     border: 0.25px var(--cellBorder) solid;
     font-size: 4vmin;
-    color: white;
+    font-weight: bolder;
+    color: rgb(11, 72, 90);
     text-align: center;
     line-height: 170%;
     cursor: pointer;
-    
+
 }
 
 .cell:hover {
@@ -125,11 +230,12 @@ h1 {
 }
 
 @keyframes appear {
-    0.0%{
+    0.0% {
         background: #8EC2C2;
         opacity: 0.2;
     }
-    47.8%{
+
+    47.8% {
         background: #8EC2C2;
         opacity: 1;
     }
