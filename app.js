@@ -262,7 +262,7 @@ function setTimer() {
 
         console.log(minutes, seconds);
 
-        timer.textContent = minutes + ":" + seconds;
+        timer.textContent = minutes > 10 ? minutes : "0" + minutes + ":" + seconds;
 
         if (distance < 0) {
             clearInterval(myInterval)
