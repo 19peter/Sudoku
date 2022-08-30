@@ -70,8 +70,8 @@ playBtn.addEventListener("click", () => {
     }
 
     container.style.display = "grid";
-    container.style.setProperty("--grid-size", gridSize)
-    container.style.setProperty("--cell-size", `7vmin`)
+    // container.style.setProperty("--grid-size", gridSize)
+    // container.style.setProperty("--cell-size", `7vmin`)
 
     const gameBoard = new Grid(container, gridSize, diffLevel, eraseFalseSetting.checked);
 

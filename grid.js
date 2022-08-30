@@ -127,6 +127,7 @@ export default class Grid {
 
             el.cell.style.setProperty("--cellBackground", normalCellColor)
 
+            //HOVERING EFFECTS -- MOUSEOVR , MOUSELEAVE
             el.cell.addEventListener("mouseover", () => {
                 this.rows[el.rowIndex].forEach((element) => {
                     if (element.false) {
@@ -208,13 +209,23 @@ export default class Grid {
                     }
                 })
 
-                el.cell.style.color = "rgb(11, 72, 90)"
+                if (el.isClicked) {
+                    el.cell.style.color = "cyan"
+
+                } else {
+                    el.cell.style.color = "rgb(11, 72, 90)"
+
+                }
+
             })
 
+            //ON CLICK EFFECTS
             el.cell.addEventListener("click", () => {
 
+                //Neutralization step ==> return to default 
                 this.cells.forEach((cell) => {
                     cell.isClicked = false;
+                    cell.cell.style.color = "rgb(11, 72, 90)"
                     cell.cell.style.transform = "scale(1)";
                     cell.cell.classList.remove("clicked-cell");
                     if (!cell.false) {
@@ -229,6 +240,7 @@ export default class Grid {
                     this.cells.forEach((cell) => {
                         if (cell.number_ == el.number_ && !cell.hidden) {
                             cell.isClicked = true;
+                            cell.cell.style.color = "cyan";
                             cell.cell.style.transform = "scale(1.1)";
                             cell.cell.classList.add("clicked-cell");
                             cell.cell.style.setProperty("--cellBackground", clickedCellColor);
@@ -242,6 +254,7 @@ export default class Grid {
                     this.cells.forEach((cell) => {
                         if (cell.number_ == el.number_ && !cell.hidden) {
                             cell.isClicked = false;
+                            cell.cell.style.color = "rgb(11, 72, 90)"
                             cell.cell.style.transform = "scale(1)";
                             cell.cell.classList.remove("clicked-cell")
                             cell.cell.style.setProperty("--cellBackground", normalCellColor);
